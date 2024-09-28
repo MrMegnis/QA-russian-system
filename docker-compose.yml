@@ -1,0 +1,7 @@
+services:
+  api:
+    ports:
+      - "5000:5000"
+    build:
+      context: ./
+      dockerfile: ./model_api/Dockerfile

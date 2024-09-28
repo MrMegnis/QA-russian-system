@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Система ответов на вопросы</title>
+</head>
+<body>
+    <h1>Система ответов на вопросы</h1>
+
+    <form method="POST" action="/">
+        <label for="context">Контекст:</label>
+        <textarea id="context" name="context" rows="10" cols="50">{{ context }}</textarea><br><br>
+
+        <label for="question">Вопрос:</label>
+        <input type="text" id="question" name="question" size="50" value="{{ question }}"><br><br>
+
+        <button type="submit">Отправить</button>
+    </form>
+
+    <div id="answer">
+        {% if answer %}
+            Ответ: {{ answer }}
+        {% endif %}
+    </div>
+
+</body>
+</html>
