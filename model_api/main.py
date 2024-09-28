@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-# Загружаем модель для генерации текста
+# Loading model for question answering
 warning("Start model loading")
 model = HuggingFaceQAModel(model_name="Megnis/bert-finetuned-sbersquad")
 warning("End model loading")
@@ -18,12 +18,11 @@ def index():
         context = request.form.get('context', '')
         question = request.form.get('question', '')
 
-        # Передаем контекст и вопрос модели
+        # get answer from model
         response = model.generate(context=context, question=question)
 
-        # Возвращаем ответ модели в формате JSON
-        answer = response
-        return render_template('index.html', context=context, question=question, answer=answer)
+        # return answer in JSON format
+        return render_template('index.html', context=context, question=question, answer=response)
     else:
         return render_template('index.html')
 
@@ -33,11 +32,22 @@ def get_answer():
     context = request.form['context']
     question = request.form['question']
 
-    # Передаем контекст и вопрос модели
+    # get answer from model
     response = model.generate(context=context, question=question)
 
-    # Возвращаем ответ модели в формате JSON
+    # return answer in JSON format
     return jsonify({'context': context, 'question': question, 'answer': response})
+
+@app.route('/api/get_model_answer', methods=['POST'])
+def get_model_answer():
+    context = request.form['context']
+    question = request.form['question']
+
+    # get answer from model
+    response = model._get_model_answer(context=context, question=question)
+
+    # return answer in JSON format
+    return jsonify({'context': context, 'question': question, 'model_answer': response})
 
 
 if __name__ == '__main__':
