@@ -20,3 +20,5 @@ You can test model on main page manually or send POST request to:
 BERT model on huggingface: https://huggingface.co/google-bert/bert-base-multilingual-cased
 Fine-tuned model on huggingface: https://huggingface.co/Megnis/bert-finetuned-sbersquad
 Dataset: https://huggingface.co/datasets/kuznetsoffandrey/sberquad
+
+model fine-tuning code you can find in model-qa-tuning.ipynb file
